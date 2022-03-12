@@ -1,0 +1,294 @@
+﻿<Window x:Class="Colamachinev2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Colamachinev2" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920"         
+        ResizeMode="NoResize"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="_Border" Property="Background" Value="Yellow"/>
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="LightBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="1020"></RowDefinition>            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="menu" Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="1220"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid  Background="Purple"  >
+        <Button  Grid.Column="0" Grid.Row="0" Name="btn_sebet" HorizontalAlignment="Left" VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignIconButton}"
+            ToolTip="MaterialDesignIconButton"
+            Click="btn_sebet_Click"
+            Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+        <materialDesign:PackIcon
+            Kind="CartVariant"/>
+        </Button>
+        </Grid>
+        <Grid  Grid.Row="1" Grid.Column="0" Background="Purple">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid  Grid.Column="1" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox 
+                    HorizontalAlignment="Right" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"                    
+                    VerticalAlignment="Top"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    materialDesign:TextFieldAssist.PrefixText=" "
+                    materialDesign:TextFieldAssist.SuffixText="₼"
+                    Background="Azure"
+                    Height="160"
+                    Width="250"
+                    Name="medax"
+                    Margin="0"
+                    FontSize="22">                    
+                    <materialDesign:HintAssist.Hint>
+                        <StackPanel
+                        Orientation="Horizontal"
+                        Margin="0 0 0 0">
+                        <materialDesign:PackIcon
+                          Kind="Cash" />
+                        <TextBlock
+                          Text="Mebleg daxil edin" />
+                        </StackPanel>
+                    </materialDesign:HintAssist.Hint>
+                </TextBox>
+                <Button
+                    Click="Button_Click_3"
+                    Grid.Row="1"
+                    Style="{StaticResource MaterialDesignOutlinedLightButton}"
+                    ToolTip="MaterialDesignOutlinedButton"
+                    Content="Tesdiq"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Width="250"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            </Grid>
+            <Grid  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <GroupBox
+                    Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Width="250"      
+                    Margin="0"
+                    Header="Balans"
+                    Style="{StaticResource MaterialDesignGroupBox}"
+                    materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                    <TextBlock
+                      HorizontalAlignment="Right" VerticalAlignment="Top"  
+                      Name="tb_balans"
+                      Foreground="White"
+                      FontSize="16"
+                      Text="{Binding Balans,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </GroupBox>
+                <GroupBox Grid.Row="1"   HorizontalAlignment="Right" VerticalAlignment="Top"                      
+                    Width="250"      
+                    Margin="0"
+                    Header="Yekun"
+                    Style="{StaticResource MaterialDesignGroupBox}"
+                    materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                    <TextBlock
+                      HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Name="tb_yekun"
+                      Foreground="White"
+                      FontSize="16"
+                      Text="{Binding Yekun, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </GroupBox>
+                <GroupBox Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Top"                       
+                    Width="250"      
+                    Margin="0"
+                    Header="Qaliq"
+                    Style="{StaticResource MaterialDesignGroupBox}"
+                    materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                    <TextBlock
+                      Foreground="White"
+                      HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Name="tb_qaliq"
+                      FontSize="16"  
+                      Text="{Binding Qaliq, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </GroupBox>
+                <Grid Grid.Row="3" Background="Purple"
+                    Width="250">
+                    <Button
+                        Click="Button_Click_4"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Height="150"
+                        materialDesign:ButtonAssist.CornerRadius="90"
+                        ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        <TextBlock
+                        FontSize="35"
+                        Text="Odemek" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <materialDesign:ColorZone
+        Grid.Column="1" Grid.Row="0"
+        Mode="Standard"
+        Padding="8 4 8 4"
+        CornerRadius="2"
+        Panel.ZIndex="1"
+        Margin="16 0 0 0"
+        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="Auto" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto" />                    
+                </Grid.ColumnDefinitions>
+                <Button
+                    Click="Button_Click"
+                    Style="{StaticResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon
+                    Kind="Search"
+                    Opacity=".56" />
+                </Button>
+                <TextBox
+                    Name="tb_Seach"
+                    Grid.Column="1"
+                    Margin="8 0 0 0"
+                    materialDesign:HintAssist.Hint="Build a search bar"
+                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                    BorderThickness="0"
+                    MinWidth="200"
+                    VerticalAlignment="Center" />
+                <Button   Style="{StaticResource MaterialDesignToolButton}"
+                Grid.Column="2">
+                <materialDesign:PackIcon
+                    Kind="Microphone"
+                    Opacity=".56"
+                    Margin="8 0 0 0" />
+                </Button>                
+            </Grid>
+        </materialDesign:ColorZone>
+        <ListBox 
+            ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
+            BorderThickness="0"
+            SelectionMode="Single"           
+            Width="1220"
+            Margin="5" 
+            Name="lstBox"  
+            ItemsSource="{Binding items,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+            Background="SkyBlue" Grid.Column="1" Grid.Row="1">           
+            <ListBox.ItemTemplate >
+                 <DataTemplate>                    
+                     <StackPanel Background="Aquamarine" Width="180">
+                         <TextBlock MouseLeftButtonDown="lstBoxitemname_MouseDoubleClick" Text="{Binding Name ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Purple" FontSize="22" Margin="5"></TextBlock>
+                         <TextBlock Text="Price" FontSize="16" Margin="5,0,5,0"></TextBlock>
+                         <TextBlock Text="{Binding price,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Purple" FontSize="22" Margin="5"></TextBlock>
+                         <TextBlock Text="Stock" FontSize="16" Margin="5"></TextBlock>
+                         <TextBlock Text="{Binding count,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Purple" FontSize="22" Margin="5"></TextBlock>
+                         <Button
+                             Click="Button_Click_2"
+                             Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                             ToolTip="Sebete elave et"                            
+                             FontSize="16" Margin="5">
+                             <materialDesign:PackIcon
+                             Kind="CartPlus"
+                             Height="20"
+                             Width="20" />
+                         </Button>
+                     </StackPanel>
+                 </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Width="1220" IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <Grid Grid.Column="2" Grid.Row="1">            
+            <Button
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Button_Click_1"
+            Margin="5"
+            Style="{StaticResource MaterialDesignFloatingActionSecondaryLightButton}"
+            ToolTip="MaterialDesignFloatingActionSecondaryLightButton"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <materialDesign:PackIcon
+            Kind="HamburgerPlus"
+            Height="20"
+            Width="20" />
+            </Button>
+        </Grid>        
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Grid.Row="1"
+              Height="400" Width="300">
+            <StackPanel  Background="Green" Width="300">
+                <TextBlock Text="Name" FontSize="28" Margin="5,0,5,0"></TextBlock>
+                <TextBox Text="{Binding ename ,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Background="Aquamarine" Foreground="Purple" FontSize="22" Margin="5"></TextBox>
+                <TextBlock Text="Price" FontSize="28" Margin="5,0,5,0"></TextBlock>
+                <TextBox Text="{Binding eprice,Mode=TwoWay,UpdateSourceTrigger=LostFocus}" Background="Aquamarine" Foreground="Purple" FontSize="22" Margin="5"></TextBox>
+                <TextBlock Text="Stock" FontSize="28" Margin="5"></TextBlock>
+                <TextBox Text="{Binding ecount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Background="Aquamarine" Foreground="Purple" FontSize="22" Margin="5"></TextBox>
+                <Button
+                    Click="sv_ed_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+                    Width="120"
+                    Height="120"
+                    ToolTip="MaterialDesignFloatingActionLightButton"                            
+                    FontSize="28" Margin="5">
+                    <materialDesign:PackIcon
+                        Name="icon"
+                        Kind="HamburgerPlus" 
+                        Height="100"
+                        Width="100" />
+                </Button>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>
